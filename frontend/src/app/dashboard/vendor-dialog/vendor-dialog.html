@@ -1,0 +1,30 @@
+<h2 mat-dialog-title>Add Vendor</h2>
+
+<mat-dialog-content [formGroup]="form">
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Name</mat-label>
+    <input matInput formControlName="name" />
+    <mat-error *ngIf="form.controls.name.hasError('required')">
+      Name is required
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Email</mat-label>
+    <input matInput formControlName="email" />
+    <mat-error *ngIf="form.controls.email.hasError('required')">
+      Email is required
+    </mat-error>
+    <mat-error *ngIf="form.controls.email.hasError('email')">
+      Invalid email
+    </mat-error>
+  </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="close()" [disabled]="loading">Cancel</button>
+  <button mat-raised-button color="primary" (click)="save()" [disabled]="loading || form.invalid">
+    <mat-spinner *ngIf="loading" diameter="18"></mat-spinner>
+    <span>Save</span>
+  </button>
+</mat-dialog-actions>

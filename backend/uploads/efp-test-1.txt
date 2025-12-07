@@ -1,0 +1,9 @@
+AutoWorld Vehicle Proposal
+
+Line Items:
+Car Model AW-P1500  | Qty 3 | Unit Price 9,80,000 | Total 29,40,000 | Warranty 24 months
+Bike Model AW-B155  | Qty 10 | Unit Price 92,000 | Total 9,20,000 | Warranty 24 months
+
+Total Cost: INR 46,20,000
+Delivery: 40 Days
+Insurance: Included for 1 year

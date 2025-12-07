@@ -1,0 +1,10 @@
+mat-dialog-content {
+  max-height: 70vh;
+  overflow-y: auto;
+  overflow-x: auto;
+}
+
+mat-dialog-content pre {
+  white-space: pre-wrap !important; 
+  word-break: break-word !important; 
+}

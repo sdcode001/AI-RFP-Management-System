@@ -1,0 +1,90 @@
+<div class="rfp-wrapper">
+
+  <table class="rfp-table" mat-table [dataSource]="rfps">
+
+    <!-- RFP HEADER ROW -->
+    <ng-container matColumnDef="header">
+      <td mat-cell *matCellDef="let rfp">
+
+        <div class="rfp-card">
+
+          <!-- HEADER TITLE & ACTIONS -->
+          <div class="rfp-header">
+            <h2>{{ rfp.structuredSpec?.title || 'Untitled RFP' }}</h2>
+
+            <div class="actions">
+              <button class="big-button" mat-stroked-button (click)="openRawText(rfp?.rawText)">
+                Raw Text
+              </button>
+
+              <button class="big-button" mat-stroked-button (click)="openSpec(rfp?.structuredSpec)">
+                AI Structured Spec
+              </button>
+
+              <button class="big-button" mat-flat-button color="accent" (click)="openComparison(rfp?.id, rfp?.proposals)">
+                Compare with AI
+              </button>
+            </div>
+          </div>
+
+          <div class="proposal-container">
+
+            <table class="proposal-table">
+              <tr>
+                <th>Vendor</th>
+                <th>Reply Email</th>
+                <th>Email Attachments</th>
+                <th>Extracted Proposal</th>
+              </tr>
+
+              <tr *ngFor="let p of rfp?.proposals">
+                <td style="font-weight: bold;">{{ p.vendorName || p.vendorEmail }}</td>
+
+                <!-- REPLY EMAIL VIEWER -->
+                <td>
+                  <button class="small-button" mat-button color="primary"
+                    *ngIf="p.replyEmail"
+                    (click)="openEmail(p.replyEmail)">
+                    View Email
+                  </button>
+
+                  <span style="font-weight: bold;" *ngIf="!p.replyEmail">Not Replied</span>
+                </td>
+
+                <!-- ATTACHMENTS VIEWER -->
+                <td>
+                  <button class="small-button" mat-button color="warn"
+                    *ngIf="p.attachments?.length > 0"
+                    (click)="openAttachments(p.attachments)">
+                    Files ({{ p.attachments.length }})
+                  </button>
+
+                  <span style="font-weight: bold;" *ngIf="!p.attachments || p.attachments.length === 0">No Files</span>
+                </td>
+
+                <!-- EXTRACTED JSON VIEWER -->
+                <td>
+                  <button class="small-button" mat-button color="accent"
+                    *ngIf="p.extracted"
+                    (click)="openExtracted(p.extracted)">
+                    View AI Extracted
+                  </button>
+
+                  <span style="font-weight: bold;" *ngIf="!p.extracted">Not Replied</span>
+                </td>
+
+              </tr>
+            </table>
+
+          </div>
+
+        </div>
+
+      </td>
+    </ng-container>
+
+    <tr mat-row *matRowDef="let row; columns: ['header']"></tr>
+
+  </table>
+
+</div>

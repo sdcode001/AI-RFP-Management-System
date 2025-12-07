@@ -1,0 +1,38 @@
+.full-width {
+  width: 100%;
+}
+
+mat-dialog-actions {
+  padding-top: 1rem !important;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.8rem; 
+  flex-wrap: wrap;
+}
+
+mat-dialog-actions button {
+  min-width: 110px;
+  height: 40px;
+  border-radius: 6px !important;
+  font-weight: 600 !important;
+  font-size: 0.9rem !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: 0.2s ease-in-out;
+  box-sizing: border-box;
+}
+
+mat-dialog-actions button:hover {
+  background: rgba(0,0,0,0.08);
+}
+
+button[color="primary"] {
+  background-color: #1976d2 !important;
+  color: #fff !important;
+}
+
+button[color="primary"]:hover {
+  background-color: #0f5ba8 !important;
+}

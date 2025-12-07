@@ -1,0 +1,22 @@
+<div class="dashboard-root">
+  <mat-toolbar color="primary" class="toolbar">
+  <span class="title-text">AI RFP Management System</span>
+
+  <span class="spacer"></span>
+
+  <button mat-raised-button color="accent" (click)="openAddVendor()">
+    <mat-icon>person_add</mat-icon>
+    Add Vendor
+  </button>
+
+  <button mat-raised-button color="warn" (click)="openAddRfp()">
+    <mat-icon>note_add</mat-icon>
+    New RFP
+  </button>
+</mat-toolbar>
+
+  <div class="content">
+     <app-rfp-table [rfps]="rfps"></app-rfp-table>
+  </div>
+
+</div>

@@ -1,0 +1,83 @@
+<h2 mat-dialog-title>New RFP</h2>
+
+<mat-dialog-content class="dialog-content">
+  <!-- STEP 1: Natural language input -->
+  <section class="section">
+    <h3 class="section-title">Describe your requirement</h3>
+
+    <form [formGroup]="nlForm" class="nl-form">
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Optional Title</mat-label>
+        <input matInput formControlName="title" placeholder="Office laptops & monitors" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Requirement (natural language)</mat-label>
+        <textarea
+          matInput
+          formControlName="text"
+          rows="5"
+          placeholder="I need to procure laptops and monitors for our new office. Budget is $50,000..."
+        ></textarea>
+        <mat-error *ngIf="nlForm.controls['text']?.hasError('required')">
+          Requirement text is required
+        </mat-error>
+      </mat-form-field>
+
+      <button
+        mat-raised-button
+        color="primary"
+        type="button"
+        (click)="generateWithAI()
+"
+        [disabled]="creatingRfp || nlForm.invalid"
+      >
+        <mat-spinner *ngIf="creatingRfp" diameter="18"></mat-spinner>
+        <span>Structure with AI</span>
+      </button>
+    </form>
+  </section>
+
+  <!-- STEP 2: Show structured result -->
+  <section class="section" *ngIf="hasStructuredResult">
+    <h3 class="section-title">Structured RFP Preview for Email</h3>
+
+    <mat-card class="preview-card">
+      <div class="preview-title">
+        <strong>Title:</strong> {{rfpCreated?.structuredSpec?.title || ''}}
+      </div>
+      <div class="email-preview" [innerHTML]="buildEmailBody(rfpCreated)"></div>
+    </mat-card>
+  </section>
+
+  <!-- STEP 3: Vendor selection & send (visible only after AI result) -->
+  <section class="section" *ngIf="hasStructuredResult">
+    <h3 class="section-title">Select Vendors to Send</h3>
+
+    <form [formGroup]="vendorSelectionForm" class="vendor-form">
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Vendors</mat-label>
+        <mat-select formControlName="vendorIds" multiple>
+          <mat-option *ngFor="let v of vendors" [value]="v.id">
+            {{ v.name }} ({{ v.email }})
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <button
+        mat-raised-button
+        color="primary"
+        type="button"
+        (click)="sendToVendors()"
+        [disabled]="sendingRfp"
+      >
+        <mat-spinner *ngIf="sendingRfp" diameter="18"></mat-spinner>
+        <span *ngIf="!sendingRfp">Send RFP</span>
+      </button>
+    </form>
+  </section>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="close()" [disabled]="creatingRfp || sendingRfp">Close</button>
+</mat-dialog-actions>

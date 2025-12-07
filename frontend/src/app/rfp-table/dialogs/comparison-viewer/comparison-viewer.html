@@ -1,0 +1,35 @@
+<div class="container">
+ 
+ <div class="loader-wrapper" *ngIf="loading">
+    <div class="spinner"></div>
+    <p>Analyzing proposals...</p>
+  </div>
+
+  <ng-container *ngIf="!loading">
+    <!-- Winner + Summary -->
+    <section class="summary-card" *ngIf="winner">
+        <h2>🏆 Recommended Vendor: {{ winner.vendorName }}</h2>
+        <p>{{ recommendationSummary }}</p>
+
+        <div class="winner-score">
+        Overall Score:
+        <strong>{{ winner.overallScore | number:'1.2-2' }}</strong>
+        </div>
+
+        <p>Reason:</p>
+        <pre>{{ winner.reason }}</pre>
+    </section>
+
+
+    <!-- Overall Score Bar -->
+    <div echarts [options]="overallBar" class="chart-box"></div>
+
+    <!-- Price Bar -->
+    <div echarts [options]="priceBar" class="chart-box"></div>
+
+    <!-- Radar Chart -->
+    <div echarts [options]="radarChart" class="chart-box"></div>
+  </ng-container>
+  
+
+</div>

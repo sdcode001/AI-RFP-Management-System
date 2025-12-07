@@ -1,0 +1,10 @@
+Speed Motors Quotation Sheet
+
+Vehicles:
+Car SM-1600 | Qty 3 | Unit Price 10,50,000 | Total 31,50,000 | Warranty 36 months
+Bike SM-160 | Qty 10 | Unit Price 98,000 | Total 9,80,000 | Warranty 24 months
+
+Grand Total: INR 49,30,000
+Delivery Estimate: 50 Days
+Payment: 40/60 split
+Insurance: 1 year full coverage

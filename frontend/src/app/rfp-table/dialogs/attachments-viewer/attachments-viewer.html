@@ -1,0 +1,6 @@
+<h2 mat-dialog-title style="font-weight: bold;">Email Attachments</h2>
+<mat-dialog-content>
+    <div *ngFor="let f of data">
+    <a [href]="serverBaseUrl + f.path" target="_blank">{{ f.filename }}</a>
+    </div>
+</mat-dialog-content>
